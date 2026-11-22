@@ -34,6 +34,7 @@ java -jar cli/target/code-intelligence-engine.jar analyze --source sample-app --
 
 Then open `analysis-output/00_Index.md`. A finished copy is in [`examples/sample-app-output`](examples/sample-app-output). A two-module example (`module-1` uses `common`) is in [`examples/multimodule-output`](examples/multimodule-output).
 
+- **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)**: diagrams of the architecture, each module and stage, how linking and the AI step work, with a worked example.
 - **[EXECUTION_GUIDE_MULTI_MODULE.md](EXECUTION_GUIDE_MULTI_MODULE.md)**: step by step for a new multi-module Maven project (which modules to include, the command, a loop for all modules, the checks, the AI step).
 - **[HOW_TO_RUN.md](HOW_TO_RUN.md)**: build, run on your own code, all options, exit codes, config file, trace and regenerate commands, troubleshooting.
 - **[HOW_IT_WORKS.md](HOW_IT_WORKS.md)**: the model, every stage, how a trace is built (with a real worked example), design principles, limits, how to extend.
