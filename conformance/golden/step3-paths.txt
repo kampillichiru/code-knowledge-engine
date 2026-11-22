@@ -1,0 +1,22 @@
+# Expected paths of conformance/probe2/src/probe2/Step3.java, derived by hand from the Java semantics.
+#
+# A switch expression used as a value (return, declaration, assignment) splits the method into one path per case; a
+# yield ends its case, so `yield 20` inside an if never reaches `yield 30`. A switch expression used as a call argument
+# does not split paths. A pattern guard is part of its case's condition.
+#
+# Format as in probe-paths.txt: a method name, then <number> | <when> | <then, in order, or -> | <how it ends>
+
+viaSwitch
+1 | k == 1 | r = 10 | RETURN r
+2 | k == 2 AND k > 0 | r = 20 | RETURN r
+3 | k == 2 AND not (k > 0) | r = 30 | RETURN r
+4 | k matches no other case | r = 0 | RETURN r
+
+assignSwitch
+1 | k == 1 | v = 1 | RETURN v
+2 | k matches no other case | v = 2 | RETURN v
+
+guardStmt
+1 | o == Integer i when i > 1 | - | RETURN "x"
+2 | o == Integer i | - | RETURN "y"
+3 | o matches no other case | - | RETURN "z"

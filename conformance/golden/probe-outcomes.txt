@@ -1,0 +1,32 @@
+# Decision outcomes per unit of conformance/probe/src/probe/Probe.java.
+#
+# Counted by hand from the source, before the census existed, using these rules:
+#   if / ternary          2   then, else (an implicit else counts)
+#   loop                  2   enter, exit
+#   switch                one per case label (+1 implicit default for a statement without a default)
+#   switch expression     one per case label (no implicit default: it is exhaustive)
+#   when-guard            2   guard true, guard false
+#   try                   1 + number of catch clauses
+#   && and ||             2 each
+#   assert                2   holds, fails
+#   boolean-bodied lambda 2   true, false
+#
+# Format: <owner>#<name>=<outcomes>. Units not listed have 0 outcomes. "<lambda>" units are summed by owner.
+probe.Probe#implicitElse=2
+probe.Probe#earlyReturn=2
+probe.Probe#throwsArm=2
+probe.Probe#loops=8
+probe.Probe#tryCatch=2
+probe.Probe#switchOld=4
+probe.Probe#switchNew=2
+probe.Probe#switchYield=2
+probe.Probe#patternSwitch=5
+probe.Probe#instanceOfPattern=4
+probe.Probe#ternary=2
+probe.Probe#logical=6
+probe.Probe#<lambda>=2
+probe.Probe$1#apply=2
+probe.Probe#varargs=2
+probe.Probe#nullCheck=2
+probe.Probe#labeled=8
+probe.Probe#assertAndCast=2

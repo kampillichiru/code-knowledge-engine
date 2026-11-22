@@ -1,0 +1,15 @@
+<configuration>
+    <!-- Progress goes to stderr so stdout stays clean for results (trace, summaries). -->
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- SootUp reports every JDK class it cannot see (the JDK is not analysed); that is expected, not a problem. -->
+    <logger name="sootup" level="ERROR"/>
+    <logger name="com.chiru" level="INFO"/>
+    <root level="WARN">
+        <appender-ref ref="STDERR"/>
+    </root>
+</configuration>

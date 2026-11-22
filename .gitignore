@@ -1,0 +1,11 @@
+target/
+analysis-output/
+*.iml
+.idea/
+
+# build output and generated runs
+dist/
+examples/
+*.log
+.DS_Store
+Thumbs.db

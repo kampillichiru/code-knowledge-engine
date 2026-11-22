@@ -1,0 +1,51 @@
+# Expected paths of selected methods of conformance/probe/src/probe/Probe.java.
+#
+# The conditions, the order of the effects and the exits are derived by hand from the Java semantics (a guard clause puts
+# the rest of the method under the negated condition, a case that falls through shares the next body, finally runs on
+# every way out). Expression text is as Spoon prints it, with package qualifiers dropped.
+#
+# Format: a method name, then one row per path:  <number> | <when> | <then, in order, or -> | <how it ends>
+# <how it ends> is FALL (reaches the end of the method), RETURN <value> or THROW <value>.
+
+implicitElse
+1 | x > 10 | x = x * 2 | RETURN x
+2 | not (x > 10) | - | RETURN x
+
+earlyReturn
+1 | x < 0 | - | RETURN -1
+2 | not (x < 0) | x = x + 5 | RETURN x
+
+throwsArm
+1 | x == 0 | - | THROW new IllegalArgumentException("zero")
+2 | not (x == 0) | total = total + x | FALL
+
+nullCheck
+1 | s == null | - | RETURN -1
+2 | not (s == null) | - | RETURN s.length()
+
+switchOld
+1 | k == 1 | - | RETURN "one"
+2 | k == 2 | - | RETURN "few"
+3 | k == 3 | - | RETURN "few"
+4 | k matches no other case | - | RETURN "many"
+
+tryCatch
+1 | no exception | (finally) Probe.counter++ | RETURN Integer.parseInt(t)
+2 | exception NumberFormatException | (finally) Probe.counter++ | RETURN 0
+
+assertAndCast
+1 | assertion holds: o != null | n = ((Integer) (o)) | RETURN n
+2 | assertion fails: o != null | - | THROW AssertionError
+
+switchNew
+1 | s == OPEN | - | RETURN "o"
+2 | s == ARCHIVED | - | RETURN "c"
+
+switchYield
+1 | k == 1 | - | RETURN 10
+2 | k matches no other case | t = k * 2 | RETURN t
+
+patternSwitch
+1 | o == Integer i when i > 5 | - | RETURN "big"
+2 | o == String s | - | RETURN s
+3 | o matches no other case | - | RETURN "x"

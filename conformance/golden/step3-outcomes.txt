@@ -1,0 +1,21 @@
+# Decision outcomes per unit of conformance/probe2/src/probe2/Step3.java, counted by hand with the rules of probe-outcomes.txt.
+#
+#   static block         if (counter > 5)                                    IF 2                         = 2
+#   instance init block  for (int i = 0; i < 2; i++)                         LOOP 2                       = 2
+#   field mode           counter > 5 ? 1 : 2                                 TERNARY 2                    = 2
+#   lambdas              v -> v > 0 && v < 100                               LAMBDA_PREDICATE 2 + && 2    = 4
+#                        () -> { if (counter > 3) ... }                      IF 2                         = 2   (6 in all)
+#   viaSwitch            switch expression, labels 1, 2, default             SWITCH_EXPR 3 + the if 2     = 5
+#   nested               switch expression as a call argument               SWITCH_EXPR 2                = 2
+#   assignSwitch         v = switch (k) { case 1 -> ...; default -> ... }    SWITCH_EXPR 2                = 2
+#   guardStmt            switch statement with patterns, one `when` guard    SWITCH 3 + PATTERN_GUARD 2   = 5
+#
+# Format: <owner>#<name>=<outcomes>. Units not listed have 0 outcomes. "<lambda>" units are summed by owner.
+probe2.Step3#<static-init>=2
+probe2.Step3#<init-block>=2
+probe2.Step3#mode=2
+probe2.Step3#<lambda>=6
+probe2.Step3#viaSwitch=5
+probe2.Step3#nested=2
+probe2.Step3#assignSwitch=2
+probe2.Step3#guardStmt=5
